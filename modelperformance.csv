@@ -1,0 +1,31 @@
+Model,Epoch,Train Loss,Train Accuracy,Validation Loss,Validation Accuracy
+Layer 4,1,1.8540,53.78,1.3776,63.06
+Layer 4,2,0.9978,73.96,1.2170,67.65
+Layer 4,3,0.5498,85.54,1.2008,67.87
+Layer 4,4,0.2587,93.66,1.2958,67.10
+Layer 4,5,0.1378,96.78,1.3479,67.00
+Layer 4,6,0.0978,97.98,1.3764,67.18
+Layer 4,7,0.0857,97.99,1.4088,66.91
+Layer 4,8,0.0825,97.99,1.4695,66.05
+Layer 4,9,0.0690,98.35,1.5013,66.31
+Layer 4,10,0.0665,98.41,1.5060,66.91
+Resnet Freezing,1,2.5108,40.61,1.8232,51.88
+Resnet Freezing,2,1.6584,55.53,1.6449,54.76
+Resnet Freezing,3,1.4947,59.14,1.5909,55.77
+Resnet Freezing,4,1.4096,60.86,1.5606,57.00
+Resnet Freezing,5,1.3517,62.16,1.5547,56.86
+Resnet Freezing,6,1.3104,62.98,1.5509,57.43
+Resnet Freezing,7,1.2770,64.03,1.5273,58.24
+Resnet Freezing,8,1.2488,64.40,1.5673,57.02
+Resnet Freezing,9,1.2215,65.22,1.5447,57.77
+Resnet Freezing,10,1.2051,65.75,1.5536,57.89
+Resnet No Freezing,1,2.0654,44.25,1.6471,53.92
+Resnet No Freezing,2,1.2321,63.99,1.3815,61.37
+Resnet No Freezing,3,0.8805,73.26,1.3096,64.12
+Resnet No Freezing,4,0.5990,81.04,1.4464,62.34
+Resnet No Freezing,5,0.3768,87.95,1.4091,65.02
+Resnet No Freezing,6,0.2567,91.85,1.7070,62.54
+Resnet No Freezing,7,0.2346,92.38,1.8202,62.00
+Resnet No Freezing,8,0.1832,94.03,1.6772,64.66
+Resnet No Freezing,9,0.1791,94.33,1.7461,63.90
+Resnet No Freezing,10,0.1354,95.66,1.8902,63.97
