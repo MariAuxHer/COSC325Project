@@ -1,0 +1,2 @@
+# Welcome to the Decypher App Showcase
+See It, Say It! is a product created via machine learning methods for image identification. Its purpose is to be an aid for primary aged children to learn words associated with real world objects in English and Spanish.

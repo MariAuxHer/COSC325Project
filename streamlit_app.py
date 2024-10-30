@@ -7,10 +7,12 @@ st.sidebar.title("Menu")
 menu = st.sidebar.radio("Select a page:", ["Home", "Results", "About"])
 
 if menu == "Home":
-    st.title("Welcome to the Decypher App Showcase")
-    st.write(
-        "This website is to showcase the results our group has made on our Final Project."
-)
+    file_path = 'frontend/home.txt'
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    st.markdown(content)
 
 if menu == "Results":
     st.title("Results")
@@ -42,8 +44,12 @@ if menu == "Results":
 
 
 elif menu == "About":
-    st.title("About This App")
-    st.write(
-        "Information about app."
-    )
+    
+    file_path = 'frontend/about.txt'
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    st.markdown(content)
+
 
