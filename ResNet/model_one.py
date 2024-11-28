@@ -18,11 +18,14 @@ transform = transforms.Compose([
 
 # Load CIFAR-100 dataset
 full_dataset = datasets.CIFAR100(root='data', train=True, download=True, transform=transform)
+tmp = int(0.25 * len(full_dataset))
+dataset = torch.utils.data.Subset(full_dataset, list(range(len(full_dataset)))[:tmp])
 
 # Split the dataset into training and validation sets
-train_size = int(0.8 * len(full_dataset))  # 80% for training
-val_size = len(full_dataset) - train_size  # 20% for validation
-train_dataset, val_dataset = random_split(full_dataset, [train_size, val_size])
+train_size = int(0.2 * len(full_dataset))  # 80% for training
+# val_size = len(full_dataset) - train_size  # 20% for validation
+val_size = int(0.05 * len(full_dataset))
+train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
 
 # Create DataLoaders
 # The DataLoader in PyTorch splits the dataset into batches, each containing 64 samples.
@@ -50,7 +53,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(resnet18.parameters(), lr=0.001)
 
 # Function to train and validate the model
-def train_and_validate_model(model, train_loader, val_loader, criterion, optimizer, epochs):
+def train_and_validate_model(model, train_loader, val_loader, criterion, optimizer, epochs, l1_reg = 0.0):
     train_accuracy = []
     validation_accuracy = []
     train_loss = []
@@ -73,6 +76,10 @@ def train_and_validate_model(model, train_loader, val_loader, criterion, optimiz
 
             # Calculate loss
             loss = criterion(logits, labels.to(device))  
+
+            # Add regularization penalty to loss
+            l1_penalty = sum(torch.sum(torch.abs(param)) for param in model.parameters())
+            loss += l1_reg * l1_penalty
 
             # Backward pass
             loss.backward()  
@@ -120,4 +127,4 @@ def train_and_validate_model(model, train_loader, val_loader, criterion, optimiz
         print(f"Validation Loss: {validation_loss / len(val_loader)}, Validation Accuracy: {validation_accuracy[-1] * 100:.2f}%")
 
 # Call the training and validation function
-train_and_validate_model(resnet18, train_loader, val_loader, criterion, optimizer, epochs=10)
+train_and_validate_model(resnet18, train_loader, val_loader, criterion, optimizer, epochs=5, l1_reg = 1e-5)
