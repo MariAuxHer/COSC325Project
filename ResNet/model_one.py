@@ -17,15 +17,15 @@ transform = transforms.Compose([
 ])
 
 # Load CIFAR-100 dataset
-full_dataset = datasets.CIFAR100(root='data', train=True, download=True, transform=transform)
-tmp = int(0.25 * len(full_dataset))
-dataset = torch.utils.data.Subset(full_dataset, list(range(len(full_dataset)))[:tmp])
+full_dataset = datasets.CIFAR10(root='data', train=True, download=True, transform=transform)
+# tmp = int(0.25 * len(full_dataset))
+# dataset = torch.utils.data.Subset(full_dataset, list(range(len(full_dataset)))[:tmp])
 
 # Split the dataset into training and validation sets
-train_size = int(0.2 * len(full_dataset))  # 80% for training
+train_size = int(0.8 * len(full_dataset))  # 80% for training
 # val_size = len(full_dataset) - train_size  # 20% for validation
-val_size = int(0.05 * len(full_dataset))
-train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
+val_size = int(0.2 * len(full_dataset))
+train_dataset, val_dataset = random_split(full_dataset, [train_size, val_size])
 
 # Create DataLoaders
 # The DataLoader in PyTorch splits the dataset into batches, each containing 64 samples.
@@ -50,7 +50,8 @@ resnet18 = resnet18.to(device)
 
 # Define loss and optimizer
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(resnet18.parameters(), lr=0.001)
+# optimizer = optim.Adam(resnet18.parameters(), lr=0.02) # lr = 0.001 -> 0.02
+optimizer = optim.SGD(resnet18.parameters(), lr=0.02, momentum=0.9)
 
 # Function to train and validate the model
 def train_and_validate_model(model, train_loader, val_loader, criterion, optimizer, epochs, l1_reg = 0.0):
